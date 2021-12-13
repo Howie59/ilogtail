@@ -26,7 +26,7 @@ type CommonContext struct {
 	ConfigName string
 }
 
-// Context for plugin
+// Context插件的上下文信息(http。kafka)
 type Context interface {
 	InitContext(project, logstore, configName string)
 

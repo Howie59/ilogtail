@@ -20,9 +20,8 @@ import (
 	"github.com/alibaba/ilogtail/pkg/protocol"
 )
 
-// LogGroupQueue for aggregator, Non blocked
-// if aggregator's buffer is full, aggregator can add LogGroup to this queue
-// return error if LogGroupQueue is full
+// LogGroupQueue为非阻塞模式，如果aggregator是满的，aggregator能够添加LogGroup到这个组里面
+// 如果LogGroupQueue满了则会返回error
 type LogGroupQueue interface {
 	// no blocking
 	Add(loggroup *protocol.LogGroup) error

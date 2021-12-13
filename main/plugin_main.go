@@ -29,7 +29,7 @@ import (
 	_ "github.com/alibaba/ilogtail/plugins/all"
 )
 
-// main export http control method in pure GO.
+// main使用纯go导出http控制方法
 func main() {
 	flag.Parse()
 	defer logger.Flush()

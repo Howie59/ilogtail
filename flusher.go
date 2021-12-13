@@ -50,13 +50,9 @@ type Flusher interface {
 	//   of other methods.
 	SetUrgent(flag bool)
 
-	// Stop stops flusher and release resources.
-	// It is time for flusher to do cleaning jobs, includes:
-	// 1. Flush cached but not flushed data. For flushers that contain some kinds of
-	//   aggregation or buffering, it is important to flush cached out now, otherwise
-	//   data will lost.
-	// 2. Release opened resources: goroutines, file handles, connections, etc.
-	// 3. Maybe more, it depends.
-	// In a word, flusher should only have things that can be recycled by GC after this.
+	// Stop停掉flusher和release资源。表示可以做清理工作了，包括：
+	//   1. Flush缓存但是还没清理的数据。因为flusher包含了一些聚合或者缓存，清理掉cache部分非常重要，否则数据将会丢失
+	//   2. Release开启的资源：goroutines，file handles，connections等等
+	// flusher仅仅可以做GC清理之后的事情
 	Stop() error
 }

@@ -70,7 +70,7 @@ func HandleCPU180(w http.ResponseWriter, req *http.Request) {
 	DumpCPUInfo(180)
 }
 
-// HandleForceGC trigger force GC.
+// HandleForceGC强制触发GC
 func HandleForceGC(w http.ResponseWriter, req *http.Request) {
 	logger.Info(context.Background(), "GC begin")
 	runtime.GC()
@@ -79,7 +79,7 @@ func HandleForceGC(w http.ResponseWriter, req *http.Request) {
 	logger.Info(context.Background(), "Free os memory done")
 }
 
-// HelpServer show the help messages of the whole exported handlers.
+// HelpServer为全部导出的handlers展示帮助信息
 func HelpServer(w http.ResponseWriter, req *http.Request) {
 	_, _ = io.WriteString(w, `
 		/mem      to dump mem info
@@ -129,7 +129,7 @@ func HandleHoldOn(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// DumpCPUInfo dump the cpu profile info with the given seconds.
+// DumpCPUInfo在规定时间内dump cpu信息(pprof工具)
 func DumpCPUInfo(seconds int) {
 	f, err := os.Create(*flags.Cpuprofile)
 	if err != nil {
@@ -142,7 +142,7 @@ func DumpCPUInfo(seconds int) {
 	pprof.StopCPUProfile()
 }
 
-// DumpTraceInfo dump the logtail plugin process trace info.
+// DumpTraceInfo dump logtail插件的处理链路信息
 func DumpTraceInfo() {
 	f, err := os.Create("trace.out")
 	if err != nil {
@@ -159,7 +159,7 @@ func DumpTraceInfo() {
 	defer trace.Stop()
 }
 
-// DumpMemInfo dump the mem profile info after the given seconds.
+// DumpMemInfo借助pprof工具dump内存信息
 func DumpMemInfo(seconds int) {
 	time.Sleep((time.Duration)(seconds) * time.Second)
 

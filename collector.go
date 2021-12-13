@@ -20,7 +20,7 @@ import (
 	"github.com/alibaba/ilogtail/pkg/protocol"
 )
 
-// Collector ...
+// Collector 顾名思义收集器
 type Collector interface {
 	AddData(tags map[string]string,
 		fields map[string]string,

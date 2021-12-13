@@ -26,6 +26,6 @@ type Processor interface {
 	// Description returns a one-sentence description on the Input
 	Description() string
 
-	// Apply the filter to the given metric
+	// 将筛选应用到所给的metrics里面
 	ProcessLogs(logArray []*protocol.Log) []*protocol.Log
 }
