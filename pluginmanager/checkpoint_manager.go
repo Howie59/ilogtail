@@ -34,6 +34,7 @@ var CheckPointCleanInterval = flag.Int("CheckPointCleanInterval", 600, "checkpoi
 var MaxCleanItemPerInterval = flag.Int("MaxCleanItemPerInterval", 1000, "max clean items per interval")
 
 type checkPointManager struct {
+	// leveldb持久化存储
 	db        *leveldb.DB
 	shutdown  chan struct{}
 	waitgroup sync.WaitGroup

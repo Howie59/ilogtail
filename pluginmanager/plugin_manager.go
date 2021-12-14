@@ -227,7 +227,7 @@ func Resume() error {
 func init() {
 	go func() {
 		for {
-			// force gc every 3 minutes
+			// 3分钟强制GC一次，然后观察内存的变化
 			time.Sleep(time.Minute * 3)
 			logger.Debug(context.Background(), "force gc done", time.Now())
 			runtime.GC()

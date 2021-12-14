@@ -22,14 +22,14 @@ import (
 
 const LogTailMeta LogtailMetaKey = "LogtailContextMeta"
 
-// LogtailContextMeta is used to store metadata in Logtail context and would be
-// propagated within context.Context.
+// LogtailContextMeta被用来保存元信息，会在context.Context中传播
 type LogtailContextMeta struct {
 	project      string
 	logstore     string
 	configName   string
 	loggerHeader string
-	alarm        *util.Alarm
+	// 告警信息
+	alarm *util.Alarm
 }
 
 type LogtailMetaKey string
