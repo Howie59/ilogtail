@@ -36,7 +36,7 @@ type FieldConfig struct {
 	Comment string
 }
 
-// Generate plugin doc to the path/category directory.
+// Generate 生成插件式文档到路径/分类目录
 func Generate(path string) {
 	fileName := path + "/plugin-list" + markdownSuffix
 	str := topLevel + "Plugin List" + lf

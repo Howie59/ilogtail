@@ -49,6 +49,7 @@ func ExecuteCMD(configName string, cmdType int, params []byte) error {
 	return nil
 }
 
+// SendPb调用cgo执行发送
 func SendPb(configName string, logstore string, pbBuffer []byte, lines int) int {
 	rstVal := C.LogtailSendPb((*C.char)(util.StringPointer(configName)), C.int(len(configName)),
 		(*C.char)(util.StringPointer(logstore)), C.int(len(logstore)),

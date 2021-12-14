@@ -16,13 +16,12 @@ package doc
 
 var docCenter = make(map[string]map[string]Doc)
 
-// Doc generates markdown doc with the exported field.
-// If some field want to add comment, please use comment tag to describe it.
+// Docs利用导出字段产生markdown文档。如果一些字段想要添加评论，使用comment标签来描述它
 type Doc interface {
 	Description() string
 }
 
-// Register the doc description to the doc center.
+// Register将文档描述注册到文档中心
 func Register(category, name string, doc Doc) {
 	_, ok := docCenter[category]
 	if !ok {
