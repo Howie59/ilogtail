@@ -27,12 +27,9 @@ const (
 	MaxLogGroupSize = 3 * 1024 * 1024
 )
 
-// AggregatorDefault is the default aggregator in plugin system.
-//
-// It has two usages:
-// 1. If there is no specific aggregator in plugin config, it will be added.
-// 2. Other aggregators can use it as base aggregator.
-//
+// AggregatorDefault是插件系统里面的默认aggregator，它有两个用途：
+// 	1.如果插件配置中没有特定的aggregator，它默认会被添加
+// 	2.其他aggregator可以把它当做基础的aggregator
 // For inner usage, note about following information.
 // There is a quick flush design in AggregatorDefault, which is implemented
 // in Add method (search p.queue.Add in current file). Therefore, not all
@@ -41,10 +38,10 @@ const (
 // by AggregatorDefault in your own aggregator, you should do some extra works,
 // just see the sample code in doc.go.
 type AggregatorDefault struct {
-	MaxLogGroupCount int    // the maximum log group count to trigger flush operation
-	MaxLogCount      int    // the maximum log in a log group
-	PackFlag         bool   // whether to add config name as a tag
-	Topic            string // the output topic
+	MaxLogGroupCount int    // 触发flush操作的最大日志组量
+	MaxLogCount      int    // 日志组中的最大量
+	PackFlag         bool   // 是否添加配置名为一个tag
+	Topic            string // 输出的topic
 
 	pack            string
 	defaultLogGroup []*protocol.LogGroup
@@ -56,9 +53,9 @@ type AggregatorDefault struct {
 	nowLoggroupSize int
 }
 
-// Init method would be trigger before working.
-// 1. context store the metadata of this Logstore config
-// 2. que is a transfer channel for flushing LogGroup when reaches the maximum in the cache.
+// Init方法在工作前会被触发
+//  1. context存储Logstore配置的元信息
+//  2. 当缓存中达到最大量的时候，que是flush LogGroup的一个传输通道
 func (p *AggregatorDefault) Init(context ilogtail.Context, que ilogtail.LogGroupQueue) (int, error) {
 	p.context = context
 	p.queue = que
@@ -72,6 +69,7 @@ func (*AggregatorDefault) Description() string {
 	return "default aggregator for logtail"
 }
 
+// evaluateLogSize用于评估日志的大小
 func (*AggregatorDefault) evaluateLogSize(log *protocol.Log) int {
 	var logSize = 6
 	for _, logC := range log.Contents {
@@ -115,7 +113,7 @@ func (p *AggregatorDefault) Add(log *protocol.Log) error {
 				p.defaultLogGroup[0].Topic = p.Topic
 			}
 
-			// Quick flush to avoid becoming bottleneck when large logs come.
+			// 为了避免大日志来了之后变为瓶颈，日志会迅速清理
 			if err := p.queue.Add(p.defaultLogGroup[0]); err == nil {
 				// add success, remove head log group
 				p.defaultLogGroup = p.defaultLogGroup[1:]

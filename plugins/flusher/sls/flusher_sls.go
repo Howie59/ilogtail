@@ -26,7 +26,7 @@ import (
 	"github.com/alibaba/ilogtail/pkg/util"
 )
 
-// SlsFlusher uses symbols in LogtailAdaptor(.so) to flush log groups to Logtail.
+// SlsFlusher使用.so中的符号表将日志组清理到Logtail中
 type SlsFlusher struct {
 	EnableShardHash bool
 	KeepShardHash   bool

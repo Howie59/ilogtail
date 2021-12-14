@@ -37,7 +37,7 @@ const (
 	pluginName        = "aggregator_shardhash"
 )
 
-// shardAggregator decides which agg (log group) the log belongs to.
+// shardAggregator决定log归属于哪个agg(log组)
 type shardAggregator struct {
 	md5 string
 	agg *defaultone.AggregatorDefault
